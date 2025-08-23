@@ -368,15 +368,15 @@ nav {
 }
 
 .skill_col:nth-of-type(5)::after {
-    content: 'C';
+    content: 'JQuery';
     position: absolute;
     bottom: -33px;
-    left: 25px;
+    left: 10px;
     font-size: 14px;
 }
 
 .skill_col:nth-of-type(6)::after {
-    content: 'PHP';
+    content: 'React';
     position: absolute;
     bottom: -33px;
     left: 17px;
@@ -384,15 +384,15 @@ nav {
 }
 
 .skill_col:nth-of-type(7)::after {
-    content: 'MySql';
+    content: 'PHP';
     position: absolute;
     bottom: -33px;
-    left: 12px;
+    left: 15px;
     font-size: 14px;
 }
 
 .skill_col:nth-of-type(8)::after {
-    content: 'Laravel';
+    content: 'MySQL';
     position: absolute;
     bottom: -33px;
     left: 9px;
@@ -400,18 +400,26 @@ nav {
 }
 
 .skill_col:nth-of-type(9)::after {
-    content: 'Git';
+    content: 'Laravel';
     position: absolute;
     bottom: -33px;
-    left: 22px;
+    left: 12px;
     font-size: 14px;
 }
 
 .skill_col:nth-of-type(10)::after {
-    content: 'JQuery';
+    content: 'Git';
     position: absolute;
     bottom: -33px;
-    left: 10px;
+    left: 20px;
+    font-size: 14px;
+}
+
+.skill_col:nth-of-type(11)::after {
+    content: 'C';
+    position: absolute;
+    bottom: -33px;
+    left: 25px;
     font-size: 14px;
 }
 
