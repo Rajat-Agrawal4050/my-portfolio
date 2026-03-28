@@ -1,5 +1,9 @@
 
-'use strict';
+(function () {
+    // https://dashboard.emailjs.com/admin/account
+    emailjs.init("Ya9XNwwxWCTNx72ib");  // your email js public key
+})();
+
 const name1 = document.getElementById('name');
 const email = document.getElementById('email');
 const msg = document.getElementById('message');
@@ -63,6 +67,12 @@ function func(el) {
         li.classList.remove('active');
     });
     el.classList.add('active');
+}
+
+function func2(el) {
+    let txt = el.getAttribute('data-click-id');
+    document.getElementById(txt).click();
+    console.log('clicked')
 }
 
 
@@ -168,19 +178,23 @@ document.getElementById('myForm').addEventListener('submit', (event) => {
 
     let div = document.getElementById('alert_div');
 
-    if (name1.value == '') {
+    let form = document.getElementById('myForm');
+    // console.log(form.name.value)
+    // return
+
+    if (form.name.value == '') {
 
         div.innerHTML = '<div class="alert1 alert-danger1" style="display:none !important;" id="NameErr" role="alert">Enter Your Name</div>';
         $('#NameErr').fadeIn(500).delay(3000).fadeOut(3000);
         return;
     }
-    if (!regex.test(email.value)) {
+    if (!regex.test(form.email.value)) {
 
         div.innerHTML = '<div class="alert1 alert-danger1" style="display:none !important;" id="EmailErr" role="alert">Invalid E-mail Address</div>';
         $('#EmailErr').fadeIn(500).delay(3000).fadeOut(3000);
         return;
     }
-    if (msg.value == '') {
+    if (form.message.value == '') {
 
         div.innerHTML = '<div class="alert1 alert-danger1" style="display:none !important;" id="MsgErr" role="alert">Please Enter Message</div>';
         $('#MsgErr').fadeIn(500).delay(3000).fadeOut(3000);
@@ -188,27 +202,26 @@ document.getElementById('myForm').addEventListener('submit', (event) => {
     }
     let body = "Name :" + name1.value + "<br/> Email :" + email.value + "<br/> Message :" + msg.value;
 
-    Email.send({
-        SecureToken: "6e74ba44-4d37-4d5b-b198-14821971230c",
-        To: 'rajatagrawal9394@gmail.com',
-        From: "codetutorial36@gmail.com",
-        Subject: "New Email Received from Portfolio Website",
-        Body: body
-    }).then(
-        (message) => {
-            if (message == 'OK') {
+    const templateParams= {
+        name: form.name.value,
+        email: form.email.value,
+        title: form.title.value,
+        message: form.message.value,
+    }
+    // these IDs from the previous steps
+    emailjs.sendForm('service_tjabnnq', 'template_horgz8h', form)
+        .then(() => {
+            console.log('SUCCESS!');
+              div.innerHTML = '<div class="alert1 alert-success1" style="display:none !important;" id="NameErr" role="alert">Success !</div>';
+        $('#NameErr').fadeIn(500).delay(3000).fadeOut(3000);
+        form.name.value='';
+        form.email.value='';
+        form.message.value='';
+        }, (error) => {
+            console.log('FAILED...', error);
+              div.innerHTML = '<div class="alert1 alert-danger1" style="display:none !important;" id="NameErr" role="alert">Something went wrong</div>';
+        $('#NameErr').fadeIn(500).delay(3000).fadeOut(3000);
+        });
 
-                div.innerHTML = '<div class="alert1 alert-success1" style="display:none !important" id="EmailSuccess" role="alert"><div> E-mail Sent.</div></div>';
-                $('#EmailSuccess').fadeIn(500).delay(3000).fadeOut(3000);
-                $('#myForm')[0].reset();
-            }
-            else {
-
-                div.innerHTML = '<div class="alert1 alert-danger1" style="display:none !important;" id="EmailDanger" role="alert">Something went wrong.</div>';
-                $('#EmailDanger').fadeIn(500).delay(3000).fadeOut(3000);
-            }
-
-        }
-    );
 
 });

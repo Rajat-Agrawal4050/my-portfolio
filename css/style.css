@@ -984,6 +984,10 @@ footer {
         display: inline-block;
     }
 
+    .img_container{
+        margin-top: 150px;
+    }
+
 }
 
 
